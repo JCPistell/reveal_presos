@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+set -e
+
+if [ "$#" -ne 1 ]; then
+    echo "You must enter a presentation directory"
+    exit 1
+fi
+
 echo "Starting $1 presentation in dev mode..."
 
 docker run -it --rm -p 8000:8000 \
