@@ -1,0 +1,49 @@
+/**
+ * DAS42 theme for reveal.js. This is the opposite of the 'black' theme.
+ *
+ * By Colin Pistell
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #EEEFF0;
+
+$mainColor: #1A2432;
+$headingColor: #3786C7;
+
+$mainFontSize: 40px;
+$mainFont: 'FranklinGothic URW', Helvetica, sans-serif;
+$headingFont: 'Garvis Pro', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #EA654E;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.3em;
+$heading2Size: 1.4em;
+$heading3Size: 1.1em;
+$heading4Size: 0.9em;
+
+section.has-dark-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #fff;
+	}
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
