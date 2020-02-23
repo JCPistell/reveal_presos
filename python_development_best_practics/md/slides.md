@@ -15,7 +15,9 @@
 
 ## Why Python?
 
-In short, no matter what the problem is, Python is the 2nd or 3rd best choice to tackle it.
+- In short, no matter what the problem is, Python is the 2nd or 3rd best choice to tackle it.
+- It's ubiquitous... runs on everything
+- It excels as a "glue language"
 
 
 ---
@@ -36,7 +38,7 @@ get to know your `.bash_profile`
 
 ## The Problem with Python
 
-Dependency managment sucks
+Dependency management sucks
 
 --
 
