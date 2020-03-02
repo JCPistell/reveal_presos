@@ -19,6 +19,14 @@
 - It's ubiquitous... runs on everything
 - It excels as a "glue language"
 
+---
+
+## Part I: A Pragmatic Environment
+
+1. Shell Games
+2. The Problem with Python
+3. All Hail the Pipfile
+4. Too Many Slides About Text Editors
 
 ---
 
@@ -27,10 +35,9 @@
 All craftsmen need a solid workbench to support their work. That is what the command line is. There is no escape, so you
 may as well embrace the benefits.
 
-
 --
 
-## Make it work
+## Making it work
 
 get to know your `.bash_profile`
 
@@ -52,18 +59,6 @@ Virtualenvs
 
 All hail the pipfile
 
-
---
-
-## Installing the toolkit
-
-You didn't do your homework!
-
-```
-brew install pyenv
-brew install pipenv
-echo stuff into bash_profile
-```
 
 ---
 
@@ -92,9 +87,26 @@ The true Jedi uses vim
 
 ---
 
-## Everything is a function
+## Part II: Code Structure
+
+1. Everything in a function
+2. Script Structure
+3. The `__main__` Event
+4. `argparse()`
+5. Keep it clean
+6. Exercise: FizzBuzz
+
+---
+
+## Everything in a function
 
 ![srp](media/srp.jpeg)
+
+---
+
+## Script Structure
+
+![structure](media/code_structure.png)
 
 ---
 
@@ -109,7 +121,7 @@ if __name__ == "__main__":
 
 So what does it mean?
 
---
+---
 
 ## argparse
 
@@ -121,7 +133,6 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.parse_args()
 ```
-
 
 --
 
@@ -161,11 +172,63 @@ if __name__ == "__main__":
   print(res)
 ```
 
+---
+
+## Linting
+
+This may seem pedantic but it's really important.
+
 --
+
+## Linting Options
+
+1. `flake8`
+2. `black`
+
+IMO: Use `flake8` and set your editor to auto-lint in some sane fashion
+
+---
 
 ## Exercise Time
 
 Exercise: fizzbuzz!
+
+---
+
+## Part III: Defensive Coding
+
+1. Orthoginality & Decoupling
+2. The Evils of Duplication
+3. Dead Programs Tell No Lies
+
+--
+
+Make changing stuff easy
+
+---
+
+## Orthoginality & Decoupling
+
+```python
+def apply_discount(customer, order_id, discount):
+  totals = customer
+    .orders
+    .find(order_id)
+    .get_totals()
+
+  totals.grand_total = totals.grand_total - discount
+```
+
+--
+
+## Orthoginality & Decoupling
+
+```python
+def apply_discount(customer, order_id, discount):
+  customer
+    .find_order(order_id)
+    .discount(discount)
+```
 
 ---
 
@@ -177,38 +240,124 @@ Keep your code DRY
 
 ## Duplication: The many-headed hydra
 
-Group Exercise: Find the duplication and fix it
+```python
+```
+
+--
+
+```python
+def adder(a, b)
+  """
+  This function accepts two arguments, named a and b. It adds the two arguments together, b first followed by a and then
+  returns the results
+  """
+
+  return b + a
+```
+
+--
+
+```python
+class line():
+
+  def __init__(self, a, b, length):
+    self.a = a
+    self.b = b
+    self.length = length
+```
 
 ---
 
-## Defensive Programming
+## Dead Programs Tell No Lies
 
-Dead Programs Tell No Lies
+Kill your scripts at the point of error
 
----
+--
+
+```python
+from math import pi, sqrt
+
+def circle_area(r):
+  return pi * r**2
+
+def swizzler(radius_float)
+  area = circle_area(radius_float)
+
+  if sqrt(area) < 10:
+    print("your circle is too small!")
+  else
+    print("circle is good")
+```
+
+--
 
 ## Assertiveness
 
 aka The Best Defense is...
 
+```python
+from math import pi, sqrt
+
+def circle_area(r):
+  assert type(r) in (float, int) and r > 0, "Please ensure radius is a positive number"
+  return pi * r**2
+```
+
 ---
 
-## Unit Testing
+## Part IV: Testing
+
+1. Why Test?
+2. Learn `pytest` in 60 seconds
+3. Exercise: Our first test
+4. Fixtures
+5. Mocking
+6. Test Driven Development is like LSD
+7. Exercise: Test Time
+
+---
+
+## Why test?
+
+![testing](media/testing_bears.gif)
 
 Slow is smooth, smooth is fast
 
 --
 
+## Exercise: Learn `pytest` in 60 seconds
+
 pytest assert exercise
 
 --
 
-calculator
+## Our First Test
+
+calculatron
+
+---
+
+## Fixtures
 
 ---
 
 ## Mocking
 
+---
+
+## Test Driven Development
+
+You should try it, but there are risks
+
+
+---
+
+## Exercise: Test Time
+
+- Write a function that hits a specific api endpoint
+- This endpoint returns a json in the form of `{"key": <list of ints>}`
+- Return the largest absolute value int
+- Write a test suite to validate
 
 ---
 
