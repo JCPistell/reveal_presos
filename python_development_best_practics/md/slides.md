@@ -8,8 +8,6 @@
 2. Program Structure
 3. Defensive Coding
 4. Testing
-5. Automate The World
-
 
 ---
 
@@ -89,11 +87,11 @@ The true Jedi uses vim
 
 ## Part II: Code Structure
 
-1. Everything in a function
+1. Everything In A Function
 2. Script Structure
 3. The `__main__` Event
 4. `argparse()`
-5. Keep it clean
+5. Keep It Clean
 6. Exercise: FizzBuzz
 
 ---
@@ -176,7 +174,8 @@ if __name__ == "__main__":
 
 ## Linting
 
-This may seem pedantic but it's really important.
+- This may seem pedantic but it's really important.
+- [PEP8 Site](https://www.python.org/dev/peps/pep-0008/)
 
 --
 
@@ -189,25 +188,33 @@ IMO: Use `flake8` and set your editor to auto-lint in some sane fashion
 
 ---
 
-## Exercise Time
+## Exercise: Fizzbuzz!
 
-Exercise: fizzbuzz!
+- write a function that accepts three int arguments: upper, fizz, and buzz
+- The function should iterate from 1 to the upper int
+- If the number in this iteration is divisible by the fizz number, print "fizz"
+- If the number is divisible by the buzz number, print "buzz"
+- If divisible by both, print "fizzbuzz"
+- If not divisible by either, print the number
+- Make the code executable from the command line with the ability to pass arguments via argparse
 
 ---
 
 ## Part III: Defensive Coding
 
-1. Orthoginality & Decoupling
+1. Orthogonality & Decoupling
 2. The Evils of Duplication
 3. Dead Programs Tell No Lies
 
 --
 
+## The Big Idea
+
 Make changing stuff easy
 
 ---
 
-## Orthoginality & Decoupling
+## Orthogonality & Decoupling
 
 ```python
 def apply_discount(customer, order_id, discount):
@@ -221,7 +228,7 @@ def apply_discount(customer, order_id, discount):
 
 --
 
-## Orthoginality & Decoupling
+## Orthogonality & Decoupling
 
 ```python
 def apply_discount(customer, order_id, discount):
@@ -241,6 +248,11 @@ Keep your code DRY
 ## Duplication: The many-headed hydra
 
 ```python
+def balance_printer(account):
+  if account.balance > 0:
+    print(f"Your balance is ${round(balance, 2)}")
+  else:
+    print(f"You owe ${abs(round(balance, 2))}")
 ```
 
 --
@@ -264,6 +276,18 @@ class line():
     self.a = a
     self.b = b
     self.length = length
+```
+
+--
+
+```python
+def validate_age(value):
+  validate_type(value, int)
+  validate_min_integer(value, 0)
+
+def validate_quantity(value):
+  validate_type(value, int)
+  validate_min_integer(value, 0)
 ```
 
 ---
@@ -308,11 +332,11 @@ def circle_area(r):
 ## Part IV: Testing
 
 1. Why Test?
-2. Learn `pytest` in 60 seconds
-3. Exercise: Our first test
+2. Learn `pytest` In 60 Seconds
+3. Exercise: Our First Test
 4. Fixtures
 5. Mocking
-6. Test Driven Development is like LSD
+6. Test Driven Development Is Like LSD
 7. Exercise: Test Time
 
 ---
@@ -323,25 +347,88 @@ def circle_area(r):
 
 Slow is smooth, smooth is fast
 
---
+---
 
 ## Exercise: Learn `pytest` in 60 seconds
 
-pytest assert exercise
+```python
+10 > 2
+```
 
 --
 
+```python
+-5 > 10
+```
+
+--
+
+```python
+"taco" in ["taco", "cat"]
+```
+
+--
+
+```python
+type(42.0) == int
+```
+
+---
+
 ## Our First Test
 
-calculatron
+```python
+import calculatron
+
+
+def test_add():
+    res = calculatron.add(3, 5)
+    assert res == 8
+```
 
 ---
 
 ## Fixtures
 
+Establishing a baseline
+
+```python
+@pytest.fixture
+def test_config():
+    tconf_dict = {
+        "password": "testpass",
+        "host": "www.test.com"
+    }
+
+    tconf_str = json.dumps(tconf_dict)
+
+    return tconf_str
+```
+
+
 ---
 
 ## Mocking
+
+Test the Unit, the whole Unit, and nothing but the Unit.
+
+```python
+class MockGoodResponse:
+
+    status_code = 200
+
+    @staticmethod
+    def json():
+        return {"mock_key": "mock_response"}
+
+@pytest.fixture
+def mock_good_response(monkeypatch):
+
+    def mock_get(*args, **kwargs):
+        return MockGoodResponse()
+
+    monkeypatch.setattr(requests, "get", mock_get)
+```
 
 ---
 
@@ -361,7 +448,6 @@ You should try it, but there are risks
 
 ---
 
-## Automate the world
-### CI/CD for people in a hurry
+## Thank you!!!
 
-Github actions
+![domo](media/domokun.png)
